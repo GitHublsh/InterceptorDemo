@@ -199,14 +199,15 @@ If you're in a tricky situation and prepared to deal with the consequences, rewr
 
 /** Dangerous interceptor that rewrites the server's cache-control header. */
 /** 重写服务器 cache-control 头信息的拦截器是危险的. */
-private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
-  @Override public Response intercept(Interceptor.Chain chain) throws IOException {
-    Response originalResponse = chain.proceed(chain.request());
-    return originalResponse.newBuilder()
-        .header("Cache-Control", "max-age=60")
-        .build();
-  }
-};
+
+	private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
+	  @Override public Response intercept(Interceptor.Chain chain) throws IOException {
+	    Response originalResponse = chain.proceed(chain.request());
+	    return originalResponse.newBuilder()
+	        .header("Cache-Control", "max-age=60")
+	        .build();
+	  }
+	};
 Typically this approach works best when it complements a corresponding fix on the webserver!
 
 通常这种方法最好实现在相应的网络服务器上!
